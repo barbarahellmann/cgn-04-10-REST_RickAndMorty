@@ -3,9 +3,7 @@ package com.example.bootcamprestclient.controller;
 import com.example.bootcamprestclient.model.Character;
 import com.example.bootcamprestclient.service.RAndMService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,8 +14,23 @@ public class RAndMController {
 
     private final RAndMService service;
 
-    @GetMapping("/character")
-    private List<Character> getAllCharacters() {
-        return service.getAllCharacters();
+    @GetMapping("/characters")
+    private List<Character> getCharacters(@RequestParam(name = "status", required = false) String status) {
+        if (status == null) {
+            return service.getAllCharacters();
+        } else {
+            return service.getCharacterWithStatus(status);
+        }
     }
+
+    @GetMapping("/characters/{id}")
+    private Character getCharacterById(@PathVariable int id) {
+        return service.getCharacterById(id);
+    }
+
+    /*@GetMapping("/characters")
+    @ResponseBody
+    private List<Character> getCharacterWithStatus(@RequestParam("status") String status) {
+        return service.getCharacterWithStatus(status);
+    }*/
 }
