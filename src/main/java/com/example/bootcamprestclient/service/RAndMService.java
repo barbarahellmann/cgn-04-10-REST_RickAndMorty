@@ -33,4 +33,11 @@ public class RAndMService {
                 .filter(character -> character.getStatus().equals(statusCap))
                 .collect(Collectors.toList());
     }
+
+    public long getSumOfSpecies(String species) {
+        String speciesCap = species.substring(0,1).toUpperCase() + species.substring(1);
+        return getAllCharacters().stream()
+                .filter(character -> character.getSpecies().equals(speciesCap) && character.getStatus().equals("Alive"))
+                .count();
+    }
 }

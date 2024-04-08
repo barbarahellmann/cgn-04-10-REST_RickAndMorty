@@ -28,9 +28,10 @@ public class RAndMController {
         return service.getCharacterById(id);
     }
 
-    /*@GetMapping("/characters")
-    @ResponseBody
-    private List<Character> getCharacterWithStatus(@RequestParam("status") String status) {
-        return service.getCharacterWithStatus(status);
-    }*/
+    @GetMapping("/species-statistic")
+    private long getSumOfSpecies(@RequestParam("species") String species) {
+        return service.getSumOfSpecies(species);
+    }
+
+
 }
